@@ -6,7 +6,7 @@ import logger from 'redux-logger'
 import registerServiceWorker from './registerServiceWorker'
 import './index.css'
 import App from './components/App'
-import reducer from './reducers'
+import reducer from './reducers/App'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
@@ -21,5 +21,7 @@ ReactDOM.render(
     <Provider store={store}>
         <App/>
     </Provider>,
-    document.getElementById('root'));
-registerServiceWorker();
+    document.getElementById('root')
+)
+
+registerServiceWorker()
