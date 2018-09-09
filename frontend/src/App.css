@@ -1,28 +1,40 @@
-.App {
+
+html, body, .root {
+  height: 100%;
+}
+body {
+  line-height: 1.5;
+}
+
+.app {
+  font-family: 'Karla', sans-serif;
+}
+
+a, a:hover, a:focus, a:active{
+  text-decoration: none;
+  color: #000;
+}
+
+.categories-menu{
+  list-style: none;
+  margin: 0;
+  display: flex;
+  flex: 0 0 100%;
+  background-color:#1E90FF;
+  padding: 0 10px;
+}
+
+.categories-menu a{
+  flex-shrink: 0;
+  flex-grow: 1;
+  color: #fff;
   text-align: center;
+  padding: 5px 0;
+  border-radius: 3px 3px 0 0;
+  font-size: 1.3em;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.categories-menu .selected-item{
+  background-color: #fff;
+  color: #000;
 }

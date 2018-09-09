@@ -4,6 +4,7 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import logger from 'redux-logger'
 import thunk from 'redux-thunk'
+import WebFont from 'webfontloader'
 import registerServiceWorker from './registerServiceWorker'
 import './index.css'
 import App from './components/App'
@@ -17,6 +18,12 @@ const store = createStore(
         applyMiddleware(thunk, logger)
     )
 )
+
+WebFont.load({
+    google: {
+        families: ['Karla', 'sans-serif']
+    }
+})
 
 ReactDOM.render(
     <Provider store={store}>
