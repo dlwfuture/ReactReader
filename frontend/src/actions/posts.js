@@ -1,38 +1,24 @@
-export const ADD_POST = 'ADD_POST'
-export const REMOVE_POST = 'REMOVE_POST'
-export const UPDATE_POST = 'UPDATE_POST'
-export const VOTE_POST = 'VOTE_POST'
+import { getAllPosts, getPostsByCategories } from '../utils/api'
 
-export function addPost ({id, timestamp, title, body, author, category}){
-    return {
-        type: ADD_POST,
-        id,
-        timestamp,
-        title,
-        body,
-        author,
-        category
+export const GET_ALL_POSTS = 'GET_ALL_POSTS'
+export const GET_POSTS_BY_CATEGORY = 'GET_POSTS_BY_CATEGORY'
+
+export function GetAllPosts() {  
+    return (dispatch) => {
+        getAllPosts()
+        .then(posts => dispatch({type: GET_ALL_POSTS, posts: posts})
+        ).catch(error => {
+            throw(error);
+        })
     }
 }
 
-export function removePost ({id}){
-    return {
-        type: REMOVE_POST,
-        id,
-    }
-}
-
-export function updatePost ({title, body}){
-    return {
-        type: UPDATE_POST,
-        title,
-        body,
-    }
-}
-
-export function votePost ({option}) {
-    return {
-        type: VOTE_POST,
-        option,
+export function GetPostsByCategory(category) {  
+    return (dispatch) => {
+        getPostsByCategories(category)
+        .then(posts => dispatch({type: GET_POSTS_BY_CATEGORY, posts: posts})
+        ).catch(error => {
+            throw(error);
+        })
     }
 }
