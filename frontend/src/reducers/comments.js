@@ -1,6 +1,9 @@
 import { ADD_COMMENT, REMOVE_COMMENT, UPDATE_COMMENT, VOTE_COMMENT } from '../actions/comments'
 
 export function comments(state = {}, action){
+    if (!action || !action.type)
+        return state
+
     const { 
         id,
         timestamp,
