@@ -135,3 +135,16 @@ a, a:hover, a:focus, a:active{
 .post-bottom-item .item-value{
   margin-left: 10px;
 }
+
+.post-create-button a{
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  cursor: pointer;
+  color: #d1402e;
+}
+
+.post-create-button a:hover{
+  color: #000;
+  transition: 0.1s ease-in color;
+}

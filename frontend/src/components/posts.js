@@ -77,6 +77,11 @@ class Posts extends Component {
                         </div>
                     ))
                }
+                <div class='post-create-button'>
+                    <a href=''>
+                        <FontAwesome className='search-loader' size='5x' name='plus-circle' />
+                    </a>
+                </div>
             </div>
         )
     }
