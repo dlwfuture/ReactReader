@@ -24,6 +24,10 @@ a, a:hover, a:focus, a:active{
   padding: 0 10px;
 }
 
+.categories-menu a:hover:not(.selected-item){
+  background-color: #4aa6ff;
+}
+
 .categories-menu a{
   flex-shrink: 0;
   flex-grow: 1;
@@ -34,7 +38,100 @@ a, a:hover, a:focus, a:active{
   font-size: 1.3em;
 }
 
+.categories-menu a:hover {
+  color: #666;
+  transition: 0.2s ease-in color;
+}
+
 .categories-menu .selected-item{
   background-color: #fff;
   color: #000;
+}
+
+.post-container{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.post-item{
+  width: 50%;
+  padding: 5% 25%;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+}
+
+.post-pic-holder{
+  display: block;
+  width: 65px;
+  height: 65px;
+  background-color: #1E90FF;
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  position: relative;
+
+
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.post-pic-holder span{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.post-header-holder{
+  margin-left: 35px;
+}
+
+.post-header-container{
+  display: flex;
+  margin: auto;
+  position: relative;
+}
+
+.post-title{
+  text-align: center;
+}
+
+.post-header-content{
+  padding: 0 25px 0 0;
+}
+
+.post-header-content > span{
+  font-size: 1.2em;
+  color: #1E90FF;
+}
+
+.post-header-content > .content-title{
+  font-weight: bolder;
+  font-size: 1em;
+  padding-right: 10px;
+  color: #000;
+}
+
+.post-content{
+  justify-content: baseline;
+  text-align: justify;
+  font-size: 1.1em;
+  margin: 25px 0;
+}
+
+.post-bottom-holder{
+  color: #d1402e;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.post-bottom-item{
+  padding-right: 25px;
+}
+
+.post-bottom-item .item-value{
+  margin-left: 10px;
 }

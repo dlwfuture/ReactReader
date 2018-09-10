@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
 import '../App.css'
+import 'font-awesome/css/font-awesome.min.css'
 import Categories from './categories'
 
 class App extends Component {
