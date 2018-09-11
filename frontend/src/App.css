@@ -15,6 +15,10 @@ a, a:hover, a:focus, a:active{
   color: #000;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 .categories-menu{
   list-style: none;
   margin: 0;
@@ -129,11 +133,15 @@ a, a:hover, a:focus, a:active{
 }
 
 .post-bottom-item{
-  padding-right: 25px;
+  padding-right: 50px;
 }
 
 .post-bottom-item .item-value{
   margin-left: 10px;
+}
+
+.post-spacer{
+  margin: 5px;
 }
 
 .post-create-button a{

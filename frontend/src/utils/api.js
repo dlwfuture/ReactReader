@@ -6,6 +6,7 @@ if (!token)
 
 const headers = {
     'Accept': 'application/json',
+    'Content-Type': 'application/json',
     'Authorization': token
 }  
 
@@ -53,7 +54,7 @@ export const addPost = (post) => {
 }
   
 export const votePost = (postId, option) => {
-    const body = JSON.stringify({ option });
+    const body = JSON.stringify({ option })
 
     return fetch(`${API_URL}/posts/${postId}`, { method: 'POST', headers, body })
         .then(response => response.json())

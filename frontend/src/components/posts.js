@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Moment from 'react-moment'
 import FontAwesome from 'react-fontawesome'
-import { GetAllPosts, GetPostsByCategory } from '../actions/posts'
+import { GetAllPosts, GetPostsByCategory, VotePost } from '../actions/posts'
 import { getInitials } from '../utils/helpers'
 
 class Posts extends Component {
@@ -17,30 +17,30 @@ class Posts extends Component {
 
     render() {
         return (
-            <div class='post-container'>
+            <div className='post-container'>
                {
                     this.props.posts && this.props.posts.map(post => (
-                        <div class='post-item' key={post.id}>
-                            <div class='post-pic-holder'>
+                        <div className='post-item' key={post.id}>
+                            <div className='post-pic-holder'>
                                 <span>
                                     {getInitials(post.author)}
                                 </span>
                             </div>
-                            <div class='post-header-holder'>
-                                <h2 class='post-title'>
+                            <div className='post-header-holder'>
+                                <h2 className='post-title'>
                                     {post.title}
                                 </h2>
-                                <div class='post-header-container'>
-                                    <div class='post-header-content'>
-                                        <span class='content-title'>
+                                <div className='post-header-container'>
+                                    <div className='post-header-content'>
+                                        <span className='content-title'>
                                             Author:
                                         </span>
                                         <span>
                                             {post.author}
                                         </span>
                                     </div>
-                                    <div class='post-header-content'>
-                                        <span class='content-title'>
+                                    <div className='post-header-content'>
+                                        <span className='content-title'>
                                             Category:
                                         </span>
                                         <span>
@@ -48,27 +48,29 @@ class Posts extends Component {
                                         </span>
                                     </div>
                                 </div>
-                                <div class='post-content'>
+                                <div className='post-content'>
                                     {post.body}
                                 </div>
-                                <div class='post-bottom-holder'>
-                                    <div class='post-bottom-item'>
-                                        <FontAwesome className='search-loader' size='1x' name='clock-o' />
-                                        <span class='item-value'>
+                                <div className='post-bottom-holder'>
+                                    <div className='post-bottom-item'>
+                                        <FontAwesome className='post-bottom-icon' size='lg' name='clock-o' />
+                                        <span className='item-value'>
                                             <Moment format="DD/MM/YYYY HH:mm">
                                                 {new Date(post.timestamp)}
                                             </Moment>
                                         </span>
                                     </div>
-                                    <div class='post-bottom-item'>
-                                        <FontAwesome className='search-loader' size='1x' name='thumbs-up' />
-                                        <span class='item-value'>
+                                    <div className='post-bottom-item'>
+                                        <FontAwesome onClick={() => {this.props.VotePost(post.id, 'downVote')}} className='post-bottom-icon pointer' size='lg' name='thumbs-down' />
+                                        <span className='item-value'>
                                             {post.voteScore}
                                         </span>
+                                        <span className='post-spacer'></span>
+                                        <FontAwesome onClick={() => {this.props.VotePost(post.id, 'upVote')}} className='post-bottom-icon pointer' size='lg' name='thumbs-up' />
                                     </div>
-                                    <div class='post-bottom-item'>
-                                        <FontAwesome className='search-loader' size='1x' name='comment' />
-                                        <span class='item-value'>
+                                    <div className='post-bottom-item'>
+                                        <FontAwesome className='post-bottom-icon pointer' size='lg' name='comment' />
+                                        <span className='item-value'>
                                             {post.commentCount}
                                         </span>
                                     </div>
@@ -77,10 +79,8 @@ class Posts extends Component {
                         </div>
                     ))
                }
-                <div class='post-create-button'>
-                    <a href=''>
-                        <FontAwesome className='search-loader' size='5x' name='plus-circle' />
-                    </a>
+                <div className='post-create-button'>
+                    <FontAwesome className='search-loader' size='5x' name='plus-circle' />
                 </div>
             </div>
         )
@@ -90,7 +90,8 @@ class Posts extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         GetAllPosts: () => dispatch(GetAllPosts()),
-        GetPostsByCategory: (category) => dispatch(GetPostsByCategory(category))
+        GetPostsByCategory: (category) => dispatch(GetPostsByCategory(category)),
+        VotePost: (postId, option) => dispatch(VotePost(postId, option)),
     }
 }
 
