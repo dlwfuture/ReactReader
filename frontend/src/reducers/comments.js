@@ -1,38 +1,13 @@
-import { ADD_COMMENT, REMOVE_COMMENT, UPDATE_COMMENT, VOTE_COMMENT } from '../actions/comments'
+import { GET_COMMENTS_BY_POST_ID } from '../actions/comments'
 
-export function comments(state = {}, action){
-    if (!action || !action.type)
-        return state
-
-    const { 
-        id,
-        timestamp,
-        title,
-        body,
-        author,
-        category,
-    } = action
-
-    switch (action.type) {
-        case ADD_COMMENT:
-            return [
+export function comments(state = {}, action) {
+    switch(action.type) {
+        case GET_COMMENTS_BY_POST_ID:
+            return {
                 ...state,
-                {
-                    id:id,
-                    timestamp:timestamp,
-                    title:title,
-                    body:body,
-                    author:author,
-                    category: category,
-                }
-            ]
-        case REMOVE_COMMENT:
-            return state.filter(p => p.id !== id)
-        case UPDATE_COMMENT:
-            return state
-        case VOTE_COMMENT:
-            return state
-        default:
-            return state
+                [action.postId]: action.comments
+            }
+        default: 
+            return state;
     }
 }

@@ -1,38 +1,18 @@
-export const ADD_COMMENT = 'ADD_COMMENT'
-export const REMOVE_COMMENT = 'REMOVE_COMMENT'
-export const UPDATE_COMMENT = 'UPDATE_COMMENT'
-export const VOTE_COMMENT = 'VOTE_COMMENT'
+import { getCommentsByPostId } from '../utils/api'
 
-export function addComment ({id, timestamp, title, body, author, category}){
-    return {
-        type: ADD_COMMENT,
-        id,
-        timestamp,
-        title,
-        body,
-        author,
-        category
-    }
-}
+export const GET_COMMENTS_BY_POST_ID = 'GET_COMMENTS_BY_POST_ID'
 
-export function removeComment ({id}){
-    return {
-        type: REMOVE_COMMENT,
-        id,
-    }
-}
-
-export function updateComment ({timestamp, body}){
-    return {
-        type: UPDATE_COMMENT,
-        timestamp,
-        body,
-    }
-}
-
-export function voteComment ({option}){
-    return {
-        type: VOTE_COMMENT,
-        option,
+export function GetCommentsByPostId(postId) {  
+    return (dispatch) => {
+        getCommentsByPostId(postId)
+        .then(comments => dispatch(
+            {
+                type: GET_COMMENTS_BY_POST_ID, 
+                postId, 
+                comments
+            })
+        ).catch(error => {
+            throw(error);
+        })
     }
 }
