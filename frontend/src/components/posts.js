@@ -22,9 +22,9 @@ class Posts extends Component {
             <div className='post-container'>
                {
                     this.props.posts && this.props.posts.filter(post => !post.deleted).map(post => (
-                        <div className='post-item-separator'>
+                        <div className='post-item-separator' key={post.id}>
                             <div className='post-item-container'>
-                                <div className='post-item' key={post.id}>
+                                <div className='post-item'>
                                     <div className='post-pic-holder'>
                                         <span>
                                             {getInitials(post.author)}

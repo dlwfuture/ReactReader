@@ -20,7 +20,7 @@ class Comments extends Component {
                             </h3>
                             <div className='comment-create'>
                                 <input className='comment-create-author' type='text' placeholder='Author'></input>
-                                <textarea className='comment-create-text'></textarea>
+                                <textarea className='comment-create-text' placeholder='Message'></textarea>
                                 <button className='comment-create-post'>POST</button>
                             </div>
                             {
