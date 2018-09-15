@@ -199,16 +199,58 @@ a, a:hover, a:focus, a:active{
 
 .comment-create-author{
   display: block;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .comment-create-text{
   display: block;
   width: 100%;
-  margin:0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 100px;
+  overflow-y: auto;
+  resize: none;
 }
 
 .comment-create-post{
   display: block;
   width: 100%;
-  margin:0;
+}
+
+button, .button{
+  background-color: #00003f;
+  color: #fff;
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+button:hover, .button:hover{
+  background-color: #000073;
+  transition: background-color 0.1s ease-in;
+}
+
+button:focus,.button:focus{
+  outline:0;
 }
