@@ -195,11 +195,15 @@ a, a:hover, a:focus, a:active{
   width: 100%;
 }
 
+.post-buttons-holder{
+  margin-bottom: 30px;
+}
+
 .post-buttons-holder > .post-buttons{
   display: block;
   position: absolute;
   right: 150px;
-  margin-top: -45px;
+  margin-top: -30px;
 }
 
 .post-button{

@@ -17,8 +17,14 @@ class Posts extends Component {
         }
     }
 
-    goToPostDetails(categoryName, postId) {
+    goToPostDetails(categoryName, postId, event) {
+        event.stopPropagation()
         this.props.history.push(`/${categoryName}/${postId}`);
+    }
+
+    deletePost(post, event){
+        event.stopPropagation()
+        
     }
 
     render() {
@@ -27,7 +33,7 @@ class Posts extends Component {
             <div className='post-container'>
                {
                     this.props.posts && this.props.posts.filter(post => !post.deleted).map(post => (
-                        <div className='post-item-separator pointer' key={post.id} onClick={() => this.goToPostDetails(post.category, post.id)}>
+                        <div className='post-item-separator pointer' key={post.id} onClick={(event) => this.goToPostDetails(post.category, post.id, event)}>
                             <div className='post-item-container'>
                                 <div className='post-item'>
                                     <div className='post-pic-holder'>
@@ -96,13 +102,13 @@ class Posts extends Component {
                                         </div>
                                         <div className='post-buttons-holder'>
                                             <div className='post-buttons'>
-                                                <a href={`/${post.category}/${post.id}/edit`} className='post-button'>
+                                                <a onClick={(event) => {event.stopPropagation()}} href={`/${post.category}/${post.id}/edit`} className='post-button'>
                                                     <FontAwesome size='lg' name='edit' />
                                                     <span className='item-value'>
                                                         Edit
                                                     </span>
                                                 </a>
-                                                <a href={`/${post.category}/${post.id}/delete`} className='post-button post-button-cancel'>
+                                                <a onClick={(event) => {this.deletePost(post, event)}} className='post-button post-button-cancel'>
                                                     <FontAwesome size='lg' name='trash-o' />
                                                     <span className='item-value'>
                                                         Delete
