@@ -193,6 +193,20 @@ a, a:hover, a:focus, a:active{
   display: block;
 }
 
+.comment-votes {
+  color: #d1402e;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.comment-bottom-item{
+  padding-right: 50px;
+}
+
+.comment-bottom-item .item-value{
+  margin-left: 10px;
+}
+
 .comment-create{
 
 }

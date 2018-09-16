@@ -2,11 +2,21 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Moment from 'react-moment'
 import FontAwesome from 'react-fontawesome'
-import { GetCommentsByPostId, VoteComment } from '../actions/comments'
+import serializeForm from 'form-serialize'
+import { GetCommentsByPostId, VoteComment, AddComment } from '../actions/comments'
 
 class Comments extends Component {
+
     componentDidMount() {
         this.props.GetCommentsByPostId(this.props.postId)
+    }
+
+    saveComment = (event) => {
+        event.preventDefault()
+        let comment = serializeForm(event.target, { hash: true })
+        comment.parentId = this.props.postId
+        comment.id = comment.timestamp =  Date.now()
+        this.props.AddComment(comment)
     }
 
     render() {
@@ -19,11 +29,11 @@ class Comments extends Component {
                             <h3>
                                 COMMENTS
                             </h3>
-                            <div className='comment-create'>
-                                <input className='comment-create-author' type='text' placeholder='Author'></input>
-                                <textarea className='comment-create-text' placeholder='Message'></textarea>
-                                <button className='comment-create-post'>POST</button>
-                            </div>
+                            <form onSubmit={this.saveComment} className='comment-create'>
+                                <input required={true} id='author' name='author' className='comment-create-author' type='text' placeholder='Author'></input>
+                                <textarea required={true} id='body' name='body' className='comment-create-text' placeholder='Message'></textarea>
+                                <button type='submit' className='comment-create-post'>POST</button>
+                            </form>
                             {
                                 comments && comments.filter(comment => !comment.deleted).map(comment => (
                                     <div key={comment.id} className='comment-item'>
@@ -39,13 +49,13 @@ class Comments extends Component {
                                             {comment.body}
                                         </div>
                                         <div className="comment-votes">
-                                            <div className='post-bottom-item'>
-                                                <FontAwesome onClick={() => {this.props.VoteComment(comment.id, 'downVote', comment.parentId)}} className='post-bottom-icon pointer' size='lg' name='thumbs-down' />
+                                            <div className='comment-bottom-item'>
+                                                <FontAwesome onClick={() => {this.props.VoteComment(comment.id, 'downVote', comment.parentId)}} className='comment-bottom-icon pointer' size='lg' name='thumbs-down' />
                                                 <span className='item-value'>
                                                     {comment.voteScore}
                                                 </span>
                                                 <span className='post-spacer'></span>
-                                                <FontAwesome onClick={() => {this.props.VoteComment(comment.id, 'upVote', comment.parentId)}} className='post-bottom-icon pointer' size='lg' name='thumbs-up' />
+                                                <FontAwesome onClick={() => {this.props.VoteComment(comment.id, 'upVote', comment.parentId)}} className='comment-bottom-icon pointer' size='lg' name='thumbs-up' />
                                             </div>
                                         </div>
                                     </div>
@@ -62,7 +72,8 @@ class Comments extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         GetCommentsByPostId: (postId) => dispatch(GetCommentsByPostId(postId)),
-        VoteComment: (commentId, option, postId) => dispatch(VoteComment(commentId, option, postId))
+        VoteComment: (commentId, option, postId) => dispatch(VoteComment(commentId, option, postId)),
+        AddComment: (comment) => dispatch(AddComment(comment))
     }
 }
 
