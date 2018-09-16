@@ -32,7 +32,7 @@ class Comments extends Component {
                             <form onSubmit={this.saveComment} className='comment-create'>
                                 <input required={true} id='author' name='author' className='comment-create-author' type='text' placeholder='Author'></input>
                                 <textarea required={true} id='body' name='body' className='comment-create-text' placeholder='Message'></textarea>
-                                <button type='submit' className='comment-create-post'>POST</button>
+                                <button type='submit' className='comment-create-save'>SAVE</button>
                             </form>
                             {
                                 comments && comments.filter(comment => !comment.deleted).map(comment => (
@@ -48,7 +48,7 @@ class Comments extends Component {
                                         <div className='comment-content'>
                                             {comment.body}
                                         </div>
-                                        <div className="comment-votes">
+                                        <div className="comment-votes no-select">
                                             <div className='comment-bottom-item'>
                                                 <FontAwesome onClick={() => {this.props.VoteComment(comment.id, 'downVote', comment.parentId)}} className='comment-bottom-icon pointer' size='lg' name='thumbs-down' />
                                                 <span className='item-value'>

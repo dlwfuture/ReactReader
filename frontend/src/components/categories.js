@@ -17,7 +17,7 @@ class Categories extends Component {
                     <a href="/" className={!categoryName ? 'selected-item' : ''}>All Posts</a>
                     {
                         this.props.categories && this.props.categories.map(category => (
-                            <a key={category.name} href={`/${category.path}`} className={categoryName == category.name ? 'selected-item' : ''}>{capitalize(category.name)}</a>
+                            <a key={category.name} href={`/${category.path}`} className={categoryName === category.name ? 'selected-item' : ''}>{capitalize(category.name)}</a>
                         ))
                     }
                 </div>

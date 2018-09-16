@@ -4,6 +4,7 @@ import '../App.css'
 import 'font-awesome/css/font-awesome.min.css'
 import Categories from './categories'
 import PostDetails from './postDetails'
+import PostCreate from './postCreate'
 
 class App extends Component {
   render() {
@@ -11,6 +12,8 @@ class App extends Component {
       <div className="app">
         <BrowserRouter>
           <div>
+            <Route exact path='/:categoryName/post/create' component={PostCreate} />
+            <Route exact path='/:categoryName/:postId/edit' component={PostCreate} />
             <Route exact path='/' component={Categories} />
             <Route exact path='/:categoryName' component={Categories} />
             <Route exact path='/:categoryName/:postId' component={PostDetails} />

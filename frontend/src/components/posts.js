@@ -22,6 +22,7 @@ class Posts extends Component {
     }
 
     render() {
+        const categoryName = this.props.categoryName
         return (
             <div className='post-container'>
                {
@@ -93,6 +94,22 @@ class Posts extends Component {
                                                 </span>
                                             </div>
                                         </div>
+                                        <div className='post-buttons-holder'>
+                                            <div className='post-buttons'>
+                                                <a href={`/${post.category}/${post.id}/edit`} className='post-button'>
+                                                    <FontAwesome size='lg' name='edit' />
+                                                    <span className='item-value'>
+                                                        Edit
+                                                    </span>
+                                                </a>
+                                                <a href={`/${post.category}/${post.id}/delete`} className='post-button post-button-cancel'>
+                                                    <FontAwesome size='lg' name='trash-o' />
+                                                    <span className='item-value'>
+                                                        Delete
+                                                    </span>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -100,7 +117,7 @@ class Posts extends Component {
                     ))
                }
                 <div className='post-create-button'>
-                    <a>
+                    <a href={`${categoryName || 'category'}/post/create`}>
                         <FontAwesome className='search-loader' size='5x' name='plus-circle' />
                     </a>
                 </div>
