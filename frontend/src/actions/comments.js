@@ -1,6 +1,7 @@
-import { getCommentsByPostId } from '../utils/api'
+import { getCommentsByPostId, addComment } from '../utils/api'
 
 export const GET_COMMENTS_BY_POST_ID = 'GET_COMMENTS_BY_POST_ID'
+export const ADD_COMMENT = 'ADD_COMMENT'
 
 export function GetCommentsByPostId(postId) {  
     return (dispatch) => {
@@ -13,6 +14,18 @@ export function GetCommentsByPostId(postId) {
             })
         ).catch(error => {
             throw(error);
+        })
+    }
+}
+
+export function AddComment(comment) {
+    return (dispatch) => {
+        addComment(comment)
+        .then((comment) => dispatch(
+            GetCommentsByPostId(comment.parentId)
+        ))
+        .catch(error => {
+            throw(error)
         })
     }
 }

@@ -1,7 +1,9 @@
 import {    GET_POSTS_BY_CATEGORY, 
             GET_ALL_POSTS, 
             VOTE_POST,
-            SHOW_COMMENTS_ON_POST } from "../actions/posts"
+            SHOW_COMMENTS_ON_POST,
+            GET_POST_BY_ID
+        } from "../actions/posts"
 
 export function posts(state = {}, action) {
     switch(action.type) {
@@ -18,7 +20,7 @@ export function posts(state = {}, action) {
                 [action.postId]: !(state && state[action.post])
             }
         default: 
-            return state;
+            return state
     }
 }
 
@@ -31,6 +33,15 @@ export function showComments(state = {}, action){
                 [action.postId]: !(state && state[action.postId])
             }
         default: 
-            return state;
+            return state
     } 
+}
+
+export function post(state = {}, action){
+    switch(action.type) {
+        case GET_POST_BY_ID:
+        return { post: action.post }
+        default:
+            return state
+    }
 }

@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import '../App.css'
 import 'font-awesome/css/font-awesome.min.css'
 import Categories from './categories'
+import PostDetails from './postDetails'
 
 class App extends Component {
   render() {
@@ -12,7 +13,7 @@ class App extends Component {
           <div>
             <Route exact path='/' component={Categories} />
             <Route exact path='/:categoryName' component={Categories} />
-            <Route exact path='/:categoryName/:postId' component={Categories} />
+            <Route exact path='/:categoryName/:postId' component={PostDetails} />
           </div>
         </BrowserRouter>
       </div>

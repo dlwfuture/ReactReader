@@ -1,32 +1,24 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 import Moment from 'react-moment'
 import FontAwesome from 'react-fontawesome'
-import { GetAllPosts, GetPostsByCategory, VotePost, ShowCommentsOnPost } from '../actions/posts'
+import { GetPostById ,VotePost } from '../actions/posts'
 import { getInitials } from '../utils/helpers'
+import Comments from './comments'
 
-class Posts extends Component {
+class PostDetails extends Component {
 
     componentDidMount() {
-        if (this.props.categoryName){
-            this.props.GetPostsByCategory(this.props.categoryName)
-        }
-        else{
-            this.props.GetAllPosts()
-        }
-    }
-
-    goToPostDetails(categoryName, postId) {
-        this.props.history.push(`/${categoryName}/${postId}`);
+        this.props.GetPostById(this.props.match.params.postId)
     }
 
     render() {
+        const { post } = this.props
         return (
             <div className='post-container'>
                {
-                    this.props.posts && this.props.posts.filter(post => !post.deleted).map(post => (
-                        <div className='post-item-separator pointer' key={post.id} onClick={() => this.goToPostDetails(post.category, post.id)}>
+                    post && (
+                        <div className='post-item-separator' key={post.id}>
                             <div className='post-item-container'>
                                 <div className='post-item'>
                                     <div className='post-pic-holder'>
@@ -69,25 +61,15 @@ class Posts extends Component {
                                                 </span>
                                             </div>
                                             <div className='post-bottom-item'>
-                                                <FontAwesome onClick={(e) => 
-                                                    {
-                                                        e.stopPropagation(); 
-                                                        this.props.VotePost(post.id, 'downVote')
-                                                    }
-                                                } className='post-bottom-icon pointer' size='lg' name='thumbs-down' />
+                                                <FontAwesome onClick={() => {this.props.VotePost(post.id, 'downVote')}} className='post-bottom-icon pointer' size='lg' name='thumbs-down' />
                                                 <span className='item-value'>
                                                     {post.voteScore}
                                                 </span>
                                                 <span className='post-spacer'></span>
-                                                <FontAwesome onClick={(e) => 
-                                                    { 
-                                                        e.stopPropagation(); 
-                                                        this.props.VotePost(post.id, 'upVote')
-                                                    }
-                                                } className='post-bottom-icon pointer' size='lg' name='thumbs-up' />
+                                                <FontAwesome onClick={() => {this.props.VotePost(post.id, 'upVote')}} className='post-bottom-icon pointer' size='lg' name='thumbs-up' />
                                             </div>
                                             <div className='post-bottom-item'>
-                                                <FontAwesome className='post-bottom-icon' size='lg' name='comment' />
+                                                <FontAwesome className='post-bottom-icon pointer' size='lg' name='comment' />
                                                 <span className='item-value'>
                                                     {post.commentCount}
                                                 </span>
@@ -96,8 +78,9 @@ class Posts extends Component {
                                     </div>
                                 </div>
                             </div>
+                            <Comments postId={post.id} showComments={ true }></Comments>
                         </div>
-                    ))
+                    )
                }
                 <div className='post-create-button'>
                     <a>
@@ -111,17 +94,16 @@ class Posts extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        GetAllPosts: () => dispatch(GetAllPosts()),
-        GetPostsByCategory: (category) => dispatch(GetPostsByCategory(category)),
-        VotePost: (postId, option) => dispatch(VotePost(postId, option)),
+        GetPostById: (postId) => dispatch(GetPostById(postId)),
+        VotePost: (postId, option) => dispatch(VotePost(postId, option, true)),
     }
 }
 
-const mapStateToProps = ({posts}) => ({
-    posts: posts.posts,
+const mapStateToProps = ({post}) => ({
+    post: post.post
 })
 
-export default withRouter(connect(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Posts))
+)(PostDetails)
