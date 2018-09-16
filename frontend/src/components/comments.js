@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Moment from 'react-moment'
-import { GetCommentsByPostId } from '../actions/comments'
+import FontAwesome from 'react-fontawesome'
+import { GetCommentsByPostId, VoteComment } from '../actions/comments'
 
 class Comments extends Component {
     componentDidMount() {
@@ -37,6 +38,16 @@ class Comments extends Component {
                                         <div className='comment-content'>
                                             {comment.body}
                                         </div>
+                                        <div className="comment-votes">
+                                            <div className='post-bottom-item'>
+                                                <FontAwesome onClick={() => {this.props.VoteComment(comment.id, 'downVote', comment.parentId)}} className='post-bottom-icon pointer' size='lg' name='thumbs-down' />
+                                                <span className='item-value'>
+                                                    {comment.voteScore}
+                                                </span>
+                                                <span className='post-spacer'></span>
+                                                <FontAwesome onClick={() => {this.props.VoteComment(comment.id, 'upVote', comment.parentId)}} className='post-bottom-icon pointer' size='lg' name='thumbs-up' />
+                                            </div>
+                                        </div>
                                     </div>
                                 ))
                             }
@@ -51,6 +62,7 @@ class Comments extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         GetCommentsByPostId: (postId) => dispatch(GetCommentsByPostId(postId)),
+        VoteComment: (commentId, option, postId) => dispatch(VoteComment(commentId, option, postId))
     }
 }
 

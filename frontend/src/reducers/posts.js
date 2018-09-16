@@ -27,7 +27,6 @@ export function posts(state = {}, action) {
 export function showComments(state = {}, action){
     switch(action.type) {
         case SHOW_COMMENTS_ON_POST:
-            console.log(state)
             return {
                 ...state,
                 [action.postId]: !(state && state[action.postId])
