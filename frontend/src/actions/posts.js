@@ -1,10 +1,12 @@
-import { getAllPosts, getPostsByCategories, votePost, getPostById } from '../utils/api'
+import { getAllPosts, getPostsByCategories, votePost, getPostById, addPost, updatePost } from '../utils/api'
 
 export const GET_ALL_POSTS = 'GET_ALL_POSTS'
 export const GET_POSTS_BY_CATEGORY = 'GET_POSTS_BY_CATEGORY'
 export const VOTE_POST = 'VOTE_POST'
 export const SHOW_COMMENTS_ON_POST = 'SHOW_COMMENTS_ON_POST'
 export const GET_POST_BY_ID = 'GET_POST_BY_ID'
+export const ADD_POST = 'ADD_POST'
+export const EDIT_POST = 'EDIT_POST'
 
 export function GetAllPosts() {  
     return (dispatch) => {
@@ -54,6 +56,30 @@ export function GetPostById(postId) {
             'post': post
         })).catch(error => {
             throw(error);
+        })
+    }
+}
+
+export function AddPost(post){
+    return (dispatch) => {
+        addPost(post)
+        .then((post) => dispatch(
+            GetPostById(post.id)
+        ))
+        .catch(error => {
+            throw(error)
+        })
+    }
+}
+
+export function EditPost(post){
+    return (dispatch) => {
+        updatePost(post)
+        .then((post) => dispatch(
+            GetPostById(post.id)
+        ))
+        .catch(error => {
+            throw(error)
         })
     }
 }

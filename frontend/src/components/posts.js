@@ -19,7 +19,7 @@ class Posts extends Component {
 
     goToPostDetails(categoryName, postId, event) {
         event.stopPropagation()
-        this.props.history.push(`/${categoryName}/${postId}`);
+        this.props.history.push(`/${categoryName}/${postId}`)
     }
 
     deletePost(post, event){
