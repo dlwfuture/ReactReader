@@ -3,10 +3,15 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import Moment from 'react-moment'
 import FontAwesome from 'react-fontawesome'
+import sortBy from 'sort-by'
 import { GetAllPosts, GetPostsByCategory, VotePost, RemovePost } from '../actions/posts'
 import { getInitials } from '../utils/helpers'
 
 class Posts extends Component {
+
+    state = {
+        postOrder: 'date'
+    }
 
     componentDidMount() {
         if (this.props.categoryName){
@@ -27,19 +32,31 @@ class Posts extends Component {
         this.props.RemovePost(postId)
     }
 
+    handlePostOrderChange = (event) => {
+        this.setState({postOrder: event.target.value})
+    }
+
     render() {
         const categoryName = this.props.categoryName
         return (
             <div className='post-container'>
+                <div className='post-order'>
+                    <select value={this.state.postOrder}  onChange={this.handlePostOrderChange} id='post-order-selector' className='post-order-selector'>
+                        <option value='timestamp'>Post Date</option>
+                        <option value='voteScore'>Vote Score</option>
+                    </select> 
+                </div>
                 {
-                    !this.props.posts || !this.props.posts.filter(post => !post.deleted).length && (
+                    (!this.props.posts || !this.props.posts.filter(post => !post.deleted).length) && (
                         <div>
                             <h3 className='text-center'>No posts to show</h3>
                         </div>
                     )
                 }
                 {
-                    this.props.posts && this.props.posts.filter(post => !post.deleted).map(post => (
+                    this.props.posts && this.props.posts.filter(post => !post.deleted)
+                    .sort(sortBy(this.state.postOrder))
+                    .map(post => (
                         <div className='post-item-separator pointer' key={post.id} onClick={(event) => this.goToPostDetails(post.category, post.id, event)}>
                             <div className='post-item-container'>
                                 <div className='post-item'>

@@ -54,6 +54,10 @@ class PostCreate extends Component {
         this.setState(post)
     }
 
+    goBack() {
+        this.props.history.goBack()
+    }
+
     render() {
         const { postId } = this.props.match.params
         const post = this.state
@@ -78,7 +82,7 @@ class PostCreate extends Component {
                     <button type='submit' className='post-create-save'>SAVE</button>
                 </form>
                 <div className='post-back-button'>
-                    <a href='/'>
+                    <a onClick={() => this.goBack()} className='pointer'>
                         <FontAwesome className='search-loader' size='5x' name='arrow-circle-left' />
                     </a>
                 </div>

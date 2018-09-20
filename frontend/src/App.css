@@ -160,6 +160,16 @@ a, a:hover, a:focus, a:active{
   margin-left: 10px;
 }
 
+.post-order{
+  position: absolute;
+  right: 0;
+  margin: 10px;
+}
+
+.post-order select{
+  width: 100%;
+}
+
 .post-spacer{
   margin: 5px;
 }
