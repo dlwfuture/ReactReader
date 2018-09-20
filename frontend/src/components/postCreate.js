@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { GetPostById ,VotePost, AddPost, EditPost } from '../actions/posts'
+import uuidv1 from 'uuid/v1'
+import { GetPostById, AddPost, EditPost } from '../actions/posts'
 import { getCategories } from '../actions/categories'
 import { capitalize } from '../utils/helpers'
 import serializeForm from 'form-serialize'
@@ -19,6 +20,7 @@ class PostCreate extends Component {
 
         let post = serializeForm(event.target, { hash: true })
         post.timestamp =  Date.now()
+        post.deleted = false
 
         if (postId) {
             //Edit
@@ -27,7 +29,7 @@ class PostCreate extends Component {
         }
         else{
             //Create
-            post.id = post.timestamp
+            post.id = uuidv1()
             this.props.AddPost(post)
         }
         this.props.history.push(`/`)

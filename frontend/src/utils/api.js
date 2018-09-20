@@ -48,7 +48,7 @@ export const getCommentsById =  (commentId) => {
 */
 export const addPost = (post) => {
     const body = JSON.stringify(post)
-  
+
     return fetch(`${API_URL}/posts/`, { method: 'POST', headers, body })
       .then(response => response.json())
 }

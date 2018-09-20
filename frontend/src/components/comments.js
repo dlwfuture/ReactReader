@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Moment from 'react-moment'
+import uuidv1 from 'uuid/v1'
 import FontAwesome from 'react-fontawesome'
 import serializeForm from 'form-serialize'
 import { GetCommentsByPostId, VoteComment, AddComment } from '../actions/comments'
@@ -15,7 +16,9 @@ class Comments extends Component {
         event.preventDefault()
         let comment = serializeForm(event.target, { hash: true })
         comment.parentId = this.props.postId
-        comment.id = comment.timestamp =  Date.now()
+        comment.id = uuidv1()
+        comment.timestamp =  Date.now()
+        comment.deleted = false
         this.props.AddComment(comment)
     }
 
