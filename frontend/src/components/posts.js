@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import Moment from 'react-moment'
 import FontAwesome from 'react-fontawesome'
-import { GetAllPosts, GetPostsByCategory, VotePost } from '../actions/posts'
+import { GetAllPosts, GetPostsByCategory, VotePost, RemovePost } from '../actions/posts'
 import { getInitials } from '../utils/helpers'
 
 class Posts extends Component {
@@ -22,9 +22,9 @@ class Posts extends Component {
         this.props.history.push(`/${categoryName}/${postId}`)
     }
 
-    deletePost(post, event){
+    deletePost = (postId, event) => {
         event.stopPropagation()
-        
+        this.props.RemovePost(postId)
     }
 
     render() {
@@ -108,7 +108,7 @@ class Posts extends Component {
                                                         Edit
                                                     </span>
                                                 </a>
-                                                <a onClick={(event) => {this.deletePost(post, event)}} className='post-button post-button-cancel'>
+                                                <a onClick={(event) => {this.deletePost(post.id, event)}} className='post-button post-button-cancel'>
                                                     <FontAwesome size='lg' name='trash-o' />
                                                     <span className='item-value'>
                                                         Delete
@@ -137,6 +137,7 @@ const mapDispatchToProps = (dispatch) => {
         GetAllPosts: () => dispatch(GetAllPosts()),
         GetPostsByCategory: (category) => dispatch(GetPostsByCategory(category)),
         VotePost: (postId, option) => dispatch(VotePost(postId, option)),
+        RemovePost: (postId) => dispatch(RemovePost(postId)),
     }
 }
 

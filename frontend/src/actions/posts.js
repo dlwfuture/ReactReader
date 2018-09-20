@@ -1,4 +1,12 @@
-import { getAllPosts, getPostsByCategories, votePost, getPostById, addPost, updatePost } from '../utils/api'
+import { 
+    getAllPosts, 
+    getPostsByCategories, 
+    votePost, 
+    getPostById, 
+    addPost, 
+    removePost, 
+    updatePost 
+} from '../utils/api'
 
 export const GET_ALL_POSTS = 'GET_ALL_POSTS'
 export const GET_POSTS_BY_CATEGORY = 'GET_POSTS_BY_CATEGORY'
@@ -8,6 +16,7 @@ export const GET_POST_BY_ID = 'GET_POST_BY_ID'
 export const CHANGE_POST = 'CHANGE_POST'
 export const ADD_POST = 'ADD_POST'
 export const EDIT_POST = 'EDIT_POST'
+export const REMOVE_POST = 'REMOVE_POST'
 
 export function GetAllPosts() {  
     return (dispatch) => {
@@ -33,7 +42,7 @@ export function VotePost(postId, option, isPostDetails) {
     return (dispatch) => {
         votePost(postId, option)
         .then(() => {
-                return !isPostDetails ? dispatch(GetAllPosts()) : dispatch(GetPostById(postId));
+                return !isPostDetails ? dispatch(GetAllPosts()) : dispatch(GetPostById(postId))
             }
         ).catch(error => {
             throw(error)
@@ -84,6 +93,18 @@ export function EditPost(post){
             GetPostById(post.id)
         ))
         .catch(error => {
+            throw(error)
+        })
+    }
+}
+
+export function RemovePost(postId) {
+    return (dispatch) => {
+        removePost(postId)
+        .then(() => {
+                return dispatch(GetAllPosts())
+            }
+        ).catch(error => {
             throw(error)
         })
     }
