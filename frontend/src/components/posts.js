@@ -43,7 +43,7 @@ class Posts extends Component {
                 <div className='post-order'>
                     <select value={this.state.postOrder}  onChange={this.handlePostOrderChange} id='post-order-selector' className='post-order-selector'>
                         <option value='timestamp'>Post Date</option>
-                        <option value='voteScore'>Vote Score</option>
+                        <option value='-voteScore'>Vote Score</option>
                     </select> 
                 </div>
                 {
