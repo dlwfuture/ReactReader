@@ -5,6 +5,7 @@ export const GET_POSTS_BY_CATEGORY = 'GET_POSTS_BY_CATEGORY'
 export const VOTE_POST = 'VOTE_POST'
 export const SHOW_COMMENTS_ON_POST = 'SHOW_COMMENTS_ON_POST'
 export const GET_POST_BY_ID = 'GET_POST_BY_ID'
+export const CHANGE_POST = 'CHANGE_POST'
 export const ADD_POST = 'ADD_POST'
 export const EDIT_POST = 'EDIT_POST'
 
@@ -58,6 +59,10 @@ export function GetPostById(postId) {
             throw(error);
         })
     }
+}
+
+export function ChangePost(post) {
+    return {type: CHANGE_POST, 'post': post}
 }
 
 export function AddPost(post){

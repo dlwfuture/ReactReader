@@ -2,7 +2,8 @@ import {    GET_POSTS_BY_CATEGORY,
             GET_ALL_POSTS, 
             VOTE_POST,
             SHOW_COMMENTS_ON_POST,
-            GET_POST_BY_ID
+            GET_POST_BY_ID,
+            CHANGE_POST,
         } from "../actions/posts"
 
 export function posts(state = {}, action) {
@@ -39,7 +40,9 @@ export function showComments(state = {}, action){
 export function post(state = {}, action){
     switch(action.type) {
         case GET_POST_BY_ID:
-        return { post: action.post }
+            return { post: action.post }
+        case CHANGE_POST:
+            return { post: action.post }
         default:
             return state
     }

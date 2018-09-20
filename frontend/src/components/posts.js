@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import Moment from 'react-moment'
 import FontAwesome from 'react-fontawesome'
-import { GetAllPosts, GetPostsByCategory, VotePost, ShowCommentsOnPost } from '../actions/posts'
+import { GetAllPosts, GetPostsByCategory, VotePost } from '../actions/posts'
 import { getInitials } from '../utils/helpers'
 
 class Posts extends Component {
