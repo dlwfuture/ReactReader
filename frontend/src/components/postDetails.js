@@ -15,8 +15,8 @@ class PostDetails extends Component {
     render() {
         const { post } = this.props
         return (
-            <div className='post-container'>
-               {
+            <div className='post-detail-container'>
+                {
                     post && (
                         <div className='post-item-separator' key={post.id}>
                             <div className='post-item-container'>
@@ -81,7 +81,12 @@ class PostDetails extends Component {
                             <Comments postId={post.id} showComments={ true }></Comments>
                         </div>
                     )
-               }
+                }
+                <div className='post-back-button'>
+                    <a href='/'>
+                        <FontAwesome className='search-loader' size='5x' name='arrow-circle-left' />
+                    </a>
+                </div>
                 <div className='post-create-button'>
                     <a>
                         <FontAwesome className='search-loader' size='5x' name='plus-circle' />

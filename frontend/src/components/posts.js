@@ -31,7 +31,14 @@ class Posts extends Component {
         const categoryName = this.props.categoryName
         return (
             <div className='post-container'>
-               {
+                {
+                    !this.props.posts || !this.props.posts.filter(post => !post.deleted).length && (
+                        <div>
+                            <h3 className='text-center'>No posts to show</h3>
+                        </div>
+                    )
+                }
+                {
                     this.props.posts && this.props.posts.filter(post => !post.deleted).map(post => (
                         <div className='post-item-separator pointer' key={post.id} onClick={(event) => this.goToPostDetails(post.category, post.id, event)}>
                             <div className='post-item-container'>
@@ -121,7 +128,7 @@ class Posts extends Component {
                             </div>
                         </div>
                     ))
-               }
+                }
                 <div className='post-create-button'>
                     <a href={`${categoryName || 'category'}/post/create`}>
                         <FontAwesome className='search-loader' size='5x' name='plus-circle' />
