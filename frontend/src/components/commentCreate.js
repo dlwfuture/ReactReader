@@ -23,18 +23,21 @@ class CommentCreate extends Component {
                     body: comment.body,
                     id: comment.id,
                     deleted: comment.deleted,
-                    voteScore: comment.voteScore
+                    voteScore: comment.voteScore,
+                    timestamp: comment.timestamp
                 }
             })
         }
     }
 
     saveComment = (event) => {
+        console.log(this.state.comment.voteScore)
         event.preventDefault()
         let comment = serializeForm(event.target, { hash: true })
         comment.parentId = this.props.postId
         comment.id = this.state.comment.id || uuidv1()
         comment.timestamp =  this.state.comment.timestamp || Date.now()
+        comment.voteScore = this.state.comment.voteScore
         comment.deleted = false
         this.props.AddComment(comment)
         this.cancelCommentEdit()
@@ -61,7 +64,6 @@ class CommentCreate extends Component {
                 <form onSubmit={this.saveComment} className='comment-create'>
                     <input onChange={this.handleInputChange} value={comment.author || ''} required={true} id='author' name='author' className='comment-create-author' type='text' placeholder='Author'></input>
                     <textarea onChange={this.handleInputChange} value={comment.body || ''} required={true} id='body' name='body' className='comment-create-text' placeholder='Message'></textarea>
-                    <input id='voteScore' name='voteScore' type='hidden' value={comment.voteScore || ''}></input>
                     <div className='save-buttons-holder'>
                         <button type='submit' className='comment-create-save'>SAVE</button>
                         {

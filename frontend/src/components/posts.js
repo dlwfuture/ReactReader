@@ -59,7 +59,7 @@ class Posts extends Component {
                     .map(post => (
                         <div className='post-item-separator pointer' key={post.id} onClick={(event) => this.goToPostDetails(post.category, post.id, event)}>
                             <div className='post-item-container'>
-                                <div className='post-item animated fadeIn'>
+                                <div className='post-item animated fadeInLeft'>
                                     <div className='post-pic-holder'>
                                         <span>
                                             {getInitials(post.author)}
