@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Moment from 'react-moment'
+import sortBy from 'sort-by'
 import uuidv1 from 'uuid/v1'
 import FontAwesome from 'react-fontawesome'
 import serializeForm from 'form-serialize'
@@ -40,7 +41,9 @@ class Comments extends Component {
     }
 
     render() {
-        const comments = this.props.comments ? this.props.comments[this.props.postId] : []
+        const comments = this.props.comments && this.props.comments[this.props.postId] ? this.props.comments[this.props.postId]
+        .filter(c => !c.deleted)
+        .sort(sortBy('timestamp')) : []
         const comment = this.props.comment
         return (
             <div className='comments-container'>
