@@ -34,7 +34,7 @@ class CommentCreate extends Component {
         let comment = serializeForm(event.target, { hash: true })
         comment.parentId = this.props.postId
         comment.id = this.state.comment.id || uuidv1()
-        comment.timestamp =  Date.now()
+        comment.timestamp =  this.state.comment.timestamp || Date.now()
         comment.deleted = false
         this.props.AddComment(comment)
         this.cancelCommentEdit()
