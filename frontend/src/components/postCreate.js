@@ -67,27 +67,32 @@ class PostCreate extends Component {
 
         return (
             <div className='post-create-container'>
-                <h3>
-                    {`${postId ? 'EDIT' : 'CREATE'} POST`}
-                </h3>
-                <form onSubmit={this.savePost} className='post-create'>
-                    <input required={true} id='author' value={post.author || ''} onChange={this.handleInputChange} name='author' className='post-create-author' type='text' placeholder='Author'></input>
-                    <input required={true} id='title' value={post.title || ''} onChange={this.handleInputChange} name='title' className='post-create-title' type='text' placeholder='Title'></input>
-                    <select value={post.category || ''} required={true} onChange={this.handleInputChange} id='category' name='category' className='post-create-category'>
-                        <option value="" disabled>Pick a Category</option>
-                        {
-                            this.props.categories && this.props.categories.map(category => (
-                                <option key={category.name} value={category.name}>{capitalize(category.name)}</option>
-                            ))
-                        }
-                    </select>
-                    <textarea required={true} onChange={this.handleInputChange} id='body' name='body' className='post-create-text' placeholder='Message' value={post.body || ''}></textarea>
-                    <button type='submit' className='post-create-save'>SAVE</button>
-                </form>
-                <div className='post-back-button'>
-                    <a onClick={() => this.goBack()} className='pointer'>
-                        <FontAwesome className='search-loader' size='5x' name='arrow-circle-left' />
-                    </a>
+                <div className='form-container'>
+                    <h3>
+                        {`${postId ? 'EDIT' : 'CREATE'} POST`}
+                    </h3>
+                    <form onSubmit={this.savePost} className='post-create'>
+                        <input required={true} id='author' value={post.author || ''} onChange={this.handleInputChange} name='author' className='post-create-author' type='text' placeholder='Author'></input>
+                        <input required={true} id='title' value={post.title || ''} onChange={this.handleInputChange} name='title' className='post-create-title' type='text' placeholder='Title'></input>
+                        <select value={post.category || ''} required={true} onChange={this.handleInputChange} id='category' name='category' className='post-create-category'>
+                            <option value="" disabled>Pick a Category</option>
+                            {
+                                this.props.categories && this.props.categories.map(category => (
+                                    <option key={category.name} value={category.name}>{capitalize(category.name)}</option>
+                                ))
+                            }
+                        </select>
+                        <textarea required={true} onChange={this.handleInputChange} id='body' name='body' className='post-create-text' placeholder='Message' value={post.body || ''}></textarea>
+                        <div className='save-buttons-holder'>
+                            <button type='submit' className='post-create-save'>SAVE</button>
+                            <button onClick={() => this.goBack()} type='button' className='comment-create-cancel button-cancel'>CANCEL</button>
+                        </div>
+                    </form>
+                    <div className='post-back-button'>
+                        <a onClick={() => this.goBack()} className='pointer'>
+                            <FontAwesome className='search-loader' size='5x' name='arrow-circle-left' />
+                        </a>
+                    </div>
                 </div>
             </div>
         )

@@ -48,12 +48,13 @@ class CommentCreate extends Component {
 
     cancelCommentEdit() {
         this.setState({comment:{}})
+        this.props.onCancel()
     }
 
     render() {
         const { comment } = this.state
         return (
-            <div>
+            <div className='form-container'>
                 <h3>
                     {`${comment.id ? 'EDIT' : 'CREATE'} COMMENT`}
                 </h3>
@@ -61,12 +62,14 @@ class CommentCreate extends Component {
                     <input onChange={this.handleInputChange} value={comment.author || ''} required={true} id='author' name='author' className='comment-create-author' type='text' placeholder='Author'></input>
                     <textarea onChange={this.handleInputChange} value={comment.body || ''} required={true} id='body' name='body' className='comment-create-text' placeholder='Message'></textarea>
                     <input id='voteScore' name='voteScore' type='hidden' value={comment.voteScore || ''}></input>
-                    <button type='submit' className='comment-create-save'>SAVE</button>
-                    {
-                        comment.id && (
-                            <button onClick={() => this.cancelCommentEdit()} type='button' className='comment-create-cancel button-cancel'>CANCEL</button>
-                        )
-                    }
+                    <div className='save-buttons-holder'>
+                        <button type='submit' className='comment-create-save'>SAVE</button>
+                        {
+                            comment.id && (
+                                <button onClick={() => this.cancelCommentEdit()} type='button' className='comment-create-cancel button-cancel'>CANCEL</button>
+                            )
+                        }
+                    </div>
                 </form>
             </div>
         )

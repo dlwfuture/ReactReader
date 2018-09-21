@@ -10,7 +10,8 @@ import {
     VoteComment, 
     AddComment,
     RemoveComment,
-    GetCommentById
+    GetCommentById,
+    ClearComment
 } from '../actions/comments'
 import CommentCreate from './commentCreate'
 
@@ -40,20 +41,24 @@ class Comments extends Component {
         this.props.GetCommentById(commentId)
     }
 
+    onCancel = () => {
+        this.props.ClearComment()
+    }
+
     render() {
         const comments = this.props.comments && this.props.comments[this.props.postId] ? this.props.comments[this.props.postId]
         .filter(c => !c.deleted)
         .sort(sortBy('timestamp')) : []
-        const comment = this.props.comment
+        const commentCreate = this.props.comment
         return (
             <div className='comments-container'>
                 {
                     this.props.showComments && (
                         <div>
-                            <CommentCreate postId={this.props.postId} comment={comment}></CommentCreate>
+                            <CommentCreate postId={this.props.postId} comment={commentCreate} onCancel={this.onCancel}></CommentCreate>
                             {
                                 comments && comments.filter(comment => !comment.deleted).map(comment => (
-                                    <div key={comment.id} className='comment-item'>
+                                    <div key={comment.id} className={`comment-item ${commentCreate && comment.id === commentCreate.id ? 'comment-item-selected' : '' }`}>
                                         <div className='comment-datetime'>
                                             <Moment format="DD/MM/YYYY HH:mm">
                                                 {new Date(comment.timestamp)}
@@ -109,6 +114,7 @@ const mapDispatchToProps = (dispatch) => {
         AddComment: (comment) => dispatch(AddComment(comment)),
         RemoveComment: (commentId, postId) => dispatch(RemoveComment(commentId, postId)),
         GetCommentById: (commentId) => dispatch(GetCommentById(commentId)),
+        ClearComment: () => dispatch(ClearComment()),
     }
 }
 

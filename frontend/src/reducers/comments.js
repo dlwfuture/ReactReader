@@ -1,4 +1,4 @@
-import { GET_COMMENTS_BY_POST_ID, CHANGE_COMMENT_ID_TO_OPEN, GET_COMMENT } from '../actions/comments'
+import { GET_COMMENTS_BY_POST_ID, CHANGE_COMMENT_ID_TO_OPEN, GET_COMMENT, CLEAR_COMMENT } from '../actions/comments'
 
 export function comments(state = {}, action) {
     switch(action.type) {
@@ -25,6 +25,8 @@ export function comment(state = {}, action) {
     switch (action.type) {
         case GET_COMMENT:
             return { comment: action.comment }
+        case CLEAR_COMMENT:
+            return { comment: null }
         default:
             return state
     }

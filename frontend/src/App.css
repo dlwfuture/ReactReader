@@ -33,12 +33,30 @@ a, a:hover, a:focus, a:active{
   cursor: pointer;
 }
 
+.form-container{
+  background-color: #1E90FF;
+  padding: 25px 35px;
+  border-radius: 7px;
+}
+
+.form-container h3{
+  color: #fff;
+}
+
+.form-container input[type='text']:focus, .form-container textarea:focus{
+  border-color: #000073;
+  background: #fff;
+  color: rgba(0,0,0,.8);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
 .categories-menu{
+  background-color:#1E90FF;
   list-style: none;
   margin: 0;
   display: flex;
   flex: 0 0 100%;
-  background-color:#1E90FF;
   padding: 0 10px;
 }
 
@@ -82,8 +100,7 @@ a, a:hover, a:focus, a:active{
 }
 
 .post-item{
-  width: 50%;
-  padding: 0 25%;
+  padding: 25px 25%;
   display: flex;
 }
 
@@ -244,13 +261,25 @@ a, a:hover, a:focus, a:active{
 }
 
 .comments-container{
-  width: 50%;
   padding: 15px 25%;
 }
 
 .comment-item{
   display: block;
-  padding: 10px 0;
+  padding: 25px;
+  border-bottom: 1px solid #ddd;
+  border-left: 1px solid #dfdfdf;
+  border-right: 1px solid #dfdfdf;
+  margin: 0;
+  border-radius: 3px;
+}
+
+.comment-item:not(.comment-item-selected):hover{
+  background-color: #efefef;
+}
+
+.comment-item-selected{
+  background-color: rgb(230, 242, 255);
 }
 
 .comment-author{
@@ -282,6 +311,13 @@ a, a:hover, a:focus, a:active{
   margin-left: 10px;
 }
 
+.comment-buttons-holder{
+  position: absolute;
+  right: 25%;
+  margin-right: 15px;
+  margin-top: -65px;
+}
+
 .comment-create-author{
   display: block;
   width: 100%;
@@ -306,11 +342,11 @@ a, a:hover, a:focus, a:active{
 }
 
 button, .button{
-  background-color: #00003f;
+  background-color: #080899;
   color: #fff;
   display: inline-block;
   padding: 6px 12px;
-  margin: 10px 0;
+  margin: 5px 0;
   font-size: 14px;
   font-weight: 400;
   line-height: 1.42857143;
@@ -332,7 +368,7 @@ button, .button{
 }
 
 button:hover, .button:hover{
-  background-color: #000073;
+  background-color: #151574;
   transition: background-color 0.1s ease-in;
 }
 
@@ -341,12 +377,25 @@ button:focus,.button:focus{
 }
 
 .button-cancel{
-  background-color: #531912;
+  background-color: #d1402e;
 }
 
 .button-cancel:hover{
   transition: 0.1s ease-in background-color;
   background-color: #642f29;
+}
+
+.save-buttons-holder{
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+}
+
+.save-buttons-holder button{
+  flex: 1;
+  min-width: 0;
+  margin-right: 4px;
+  width: auto;
 }
 
 input[type='text'], textarea, select, option {

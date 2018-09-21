@@ -6,6 +6,7 @@ export const VOTE_COMMENT = 'VOTE_COMMENT'
 export const GET_COMMENT = 'GET_COMMENT'
 export const REMOVE_COMMENT = 'REMOVE_COMMENT'
 export const CHANGE_COMMENT_ID_TO_OPEN = 'CHANGE_COMMENT_ID_TO_OPEN'
+export const CLEAR_COMMENT = 'CLEAR_COMMENT'
 
 export function GetCommentsByPostId(postId) {  
     return (dispatch) => {
@@ -68,5 +69,11 @@ export function ChangeCommentIdToOpen(commentIdToOpen) {
         dispatch({type: CHANGE_COMMENT_ID_TO_OPEN,
             commentIdToOpen
         })
+    }
+}
+
+export function ClearComment() {
+    return (dispatch) => {
+        dispatch({type: CLEAR_COMMENT, "comment": null})
     }
 }
