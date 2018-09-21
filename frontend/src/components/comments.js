@@ -58,7 +58,7 @@ class Comments extends Component {
                             <CommentCreate postId={this.props.postId} comment={commentCreate} onCancel={this.onCancel}></CommentCreate>
                             {
                                 comments && comments.filter(comment => !comment.deleted).map(comment => (
-                                    <div key={comment.id} className={`comment-item ${commentCreate && comment.id === commentCreate.id ? 'comment-item-selected' : '' }`}>
+                                    <div key={comment.id} className={`comment-item animated fadeInUp ${commentCreate && comment.id === commentCreate.id ? 'comment-item-selected' : '' }`}>
                                         <div className='comment-datetime'>
                                             <Moment format="DD/MM/YYYY HH:mm">
                                                 {new Date(comment.timestamp)}

@@ -35,7 +35,7 @@ class PostDetails extends Component {
                 {
                     post && post.id && (
                         <div className='post-item-separator' key={post.id}>
-                            <div className='post-item-container'>
+                            <div className='post-item-container animated fadeInDown'>
                                 <div className='post-item'>
                                     <div className='post-pic-holder'>
                                         <span>

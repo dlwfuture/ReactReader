@@ -54,7 +54,7 @@ class CommentCreate extends Component {
     render() {
         const { comment } = this.state
         return (
-            <div className='form-container'>
+            <div className='form-container animated fadeInLeft'>
                 <h3>
                     {`${comment.id ? 'EDIT' : 'CREATE'} COMMENT`}
                 </h3>

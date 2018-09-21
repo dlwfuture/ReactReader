@@ -67,7 +67,7 @@ class PostCreate extends Component {
 
         return (
             <div className='post-create-container'>
-                <div className='form-container'>
+                <div className='form-container animated bounceInUp'>
                     <h3>
                         {`${postId ? 'EDIT' : 'CREATE'} POST`}
                     </h3>
@@ -83,16 +83,16 @@ class PostCreate extends Component {
                             }
                         </select>
                         <textarea required={true} onChange={this.handleInputChange} id='body' name='body' className='post-create-text' placeholder='Message' value={post.body || ''}></textarea>
-                        <div className='save-buttons-holder'>
+                        <div className='save-buttons-holder animated'>
                             <button type='submit' className='post-create-save'>SAVE</button>
                             <button onClick={() => this.goBack()} type='button' className='comment-create-cancel button-cancel'>CANCEL</button>
                         </div>
                     </form>
-                    <div className='post-back-button'>
-                        <a onClick={() => this.goBack()} className='pointer'>
-                            <FontAwesome className='search-loader' size='5x' name='arrow-circle-left' />
-                        </a>
-                    </div>
+                </div>
+                <div className='post-back-button'>
+                    <a onClick={() => this.goBack()} className='pointer'>
+                        <FontAwesome className='search-loader' size='5x' name='arrow-circle-left' />
+                    </a>
                 </div>
             </div>
         )
