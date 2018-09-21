@@ -4,7 +4,14 @@ import Moment from 'react-moment'
 import uuidv1 from 'uuid/v1'
 import FontAwesome from 'react-fontawesome'
 import serializeForm from 'form-serialize'
-import { GetCommentsByPostId, VoteComment, AddComment } from '../actions/comments'
+import { 
+    GetCommentsByPostId, 
+    VoteComment, 
+    AddComment,
+    RemoveComment,
+    GetCommentById
+} from '../actions/comments'
+import CommentCreate from './commentCreate'
 
 class Comments extends Component {
 
@@ -22,21 +29,25 @@ class Comments extends Component {
         this.props.AddComment(comment)
     }
 
+    deleteComment = (commentId, postId, event) => {
+        event.stopPropagation()
+        this.props.RemoveComment(commentId, postId)
+    }
+
+    editComment = (commentId, event) => {
+        event.stopPropagation()
+        this.props.GetCommentById(commentId)
+    }
+
     render() {
         const comments = this.props.comments ? this.props.comments[this.props.postId] : []
+        const comment = this.props.comment
         return (
             <div className='comments-container'>
                 {
                     this.props.showComments && (
                         <div>
-                            <h3>
-                                COMMENTS
-                            </h3>
-                            <form onSubmit={this.saveComment} className='comment-create'>
-                                <input required={true} id='author' name='author' className='comment-create-author' type='text' placeholder='Author'></input>
-                                <textarea required={true} id='body' name='body' className='comment-create-text' placeholder='Message'></textarea>
-                                <button type='submit' className='comment-create-save'>SAVE</button>
-                            </form>
+                            <CommentCreate postId={this.props.postId} comment={comment}></CommentCreate>
                             {
                                 comments && comments.filter(comment => !comment.deleted).map(comment => (
                                     <div key={comment.id} className='comment-item'>
@@ -61,6 +72,22 @@ class Comments extends Component {
                                                 <FontAwesome onClick={() => {this.props.VoteComment(comment.id, 'upVote', comment.parentId)}} className='comment-bottom-icon pointer' size='lg' name='thumbs-up' />
                                             </div>
                                         </div>
+                                        <div className='comment-buttons-holder'>
+                                            <div className='comment-buttons'>
+                                                <a onClick={(event) => {this.editComment(comment.id, event)}} className='post-button pointer'>
+                                                    <FontAwesome size='lg' name='edit' />
+                                                    <span className='item-value'>
+                                                        Edit
+                                                    </span>
+                                                </a>
+                                                <a onClick={(event) => {this.deleteComment(comment.id, comment.parentId, event)}} className='post-button post-button-cancel pointer'>
+                                                    <FontAwesome size='lg' name='trash-o' />
+                                                    <span className='item-value'>
+                                                        Delete
+                                                    </span>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
                                 ))
                             }
@@ -76,12 +103,15 @@ const mapDispatchToProps = (dispatch) => {
     return {
         GetCommentsByPostId: (postId) => dispatch(GetCommentsByPostId(postId)),
         VoteComment: (commentId, option, postId) => dispatch(VoteComment(commentId, option, postId)),
-        AddComment: (comment) => dispatch(AddComment(comment))
+        AddComment: (comment) => dispatch(AddComment(comment)),
+        RemoveComment: (commentId, postId) => dispatch(RemoveComment(commentId, postId)),
+        GetCommentById: (commentId) => dispatch(GetCommentById(commentId)),
     }
 }
 
-const mapStateToProps = ({comments}) => ({
-    comments: comments
+const mapStateToProps = ({comments, comment}) => ({
+    comments: comments,
+    comment: comment.comment
 })
 
 export default connect(

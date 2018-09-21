@@ -15,7 +15,6 @@ export function posts(state = {}, action) {
         case VOTE_POST:
             return { vote: action.vote }
         case SHOW_COMMENTS_ON_POST:
-            console.log(state)
             return {
                 ...state,
                 [action.postId]: !(state && state[action.post])

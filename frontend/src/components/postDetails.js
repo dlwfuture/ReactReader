@@ -119,11 +119,6 @@ class PostDetails extends Component {
                         <FontAwesome className='search-loader' size='5x' name='arrow-circle-left' />
                     </a>
                 </div>
-                <div className='post-create-button'>
-                    <a>
-                        <FontAwesome className='search-loader' size='5x' name='plus-circle' />
-                    </a>
-                </div>
             </div>
         )
     }

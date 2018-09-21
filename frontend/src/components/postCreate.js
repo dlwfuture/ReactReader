@@ -10,9 +10,12 @@ import serializeForm from 'form-serialize'
 
 class PostCreate extends Component {
 
+    state = {}
+
     componentDidMount(){
+        const postId = this.props.match.params.postId
         this.props.GetAllCategories()
-        this.props.GetPostById(this.props.match.params.postId)
+        postId && this.props.GetPostById(postId)
     }
 
     savePost = (event) => {
@@ -44,9 +47,9 @@ class PostCreate extends Component {
                 author: post.author,
                 category: post.category,
                 body: post.body
-              })
+                })
         }
-      }
+    }
 
     handleInputChange = (event) => {
         const post = this.state
@@ -65,20 +68,20 @@ class PostCreate extends Component {
         return (
             <div className='post-create-container'>
                 <h3>
-                    {`${postId ? 'Edit' : 'Create'} Post`}
+                    {`${postId ? 'EDIT' : 'CREATE'} POST`}
                 </h3>
                 <form onSubmit={this.savePost} className='post-create'>
-                    <input required={true} id='author' value={post && post.author} onChange={this.handleInputChange} name='author' className='post-create-author' type='text' placeholder='Author'></input>
-                    <input required={true} id='title' value={post && post.title} onChange={this.handleInputChange} name='title' className='post-create-title' type='text' placeholder='Title'></input>
-                    <select value={post ? post.category : ''} required={true} onChange={this.handleInputChange} id='category' name='category' className='post-create-category'>
+                    <input required={true} id='author' value={post.author || ''} onChange={this.handleInputChange} name='author' className='post-create-author' type='text' placeholder='Author'></input>
+                    <input required={true} id='title' value={post.title || ''} onChange={this.handleInputChange} name='title' className='post-create-title' type='text' placeholder='Title'></input>
+                    <select value={post.category || ''} required={true} onChange={this.handleInputChange} id='category' name='category' className='post-create-category'>
                         <option value="" disabled>Pick a Category</option>
                         {
                             this.props.categories && this.props.categories.map(category => (
-                                <option value={category.name}>{capitalize(category.name)}</option>
+                                <option key={category.name} value={category.name}>{capitalize(category.name)}</option>
                             ))
                         }
                     </select>
-                    <textarea required={true} onChange={this.handleInputChange} id='body' name='body' className='post-create-text' placeholder='Message' value={post && post.body}></textarea>
+                    <textarea required={true} onChange={this.handleInputChange} id='body' name='body' className='post-create-text' placeholder='Message' value={post.body || ''}></textarea>
                     <button type='submit' className='post-create-save'>SAVE</button>
                 </form>
                 <div className='post-back-button'>

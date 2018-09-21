@@ -300,7 +300,7 @@ a, a:hover, a:focus, a:active{
   resize: none;
 }
 
-.comment-create-save{
+.comment-create-save, .comment-create-cancel{
   display: block;
   width: 100%;
 }
@@ -338,6 +338,15 @@ button:hover, .button:hover{
 
 button:focus,.button:focus{
   outline:0;
+}
+
+.button-cancel{
+  background-color: #531912;
+}
+
+.button-cancel:hover{
+  transition: 0.1s ease-in background-color;
+  background-color: #642f29;
 }
 
 input[type='text'], textarea, select, option {
