@@ -4,6 +4,7 @@ import uuidv1 from 'uuid/v1'
 import serializeForm from 'form-serialize'
 import { 
     AddComment,
+    ClearComment
 } from '../actions/comments'
 
 class CommentCreate extends Component {
@@ -31,7 +32,6 @@ class CommentCreate extends Component {
     }
 
     saveComment = (event) => {
-        console.log(this.state.comment.voteScore)
         event.preventDefault()
         let comment = serializeForm(event.target, { hash: true })
         comment.parentId = this.props.postId
@@ -51,7 +51,7 @@ class CommentCreate extends Component {
 
     cancelCommentEdit() {
         this.setState({comment:{}})
-        this.props.onCancel()
+        this.props.ClearComment()
     }
 
     render() {
@@ -81,6 +81,7 @@ class CommentCreate extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         AddComment: (comment) => dispatch(AddComment(comment)),
+        ClearComment: () => dispatch(ClearComment()),
     }
 }
 

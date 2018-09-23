@@ -11,7 +11,6 @@ import {
     AddComment,
     RemoveComment,
     GetCommentById,
-    ClearComment
 } from '../actions/comments'
 import CommentCreate from './commentCreate'
 
@@ -41,10 +40,6 @@ class Comments extends Component {
         this.props.GetCommentById(commentId)
     }
 
-    onCancel = () => {
-        this.props.ClearComment()
-    }
-
     render() {
         const comments = this.props.comments && this.props.comments[this.props.postId] ? this.props.comments[this.props.postId]
         .filter(c => !c.deleted)
@@ -55,7 +50,7 @@ class Comments extends Component {
                 {
                     this.props.showComments && (
                         <div>
-                            <CommentCreate postId={this.props.postId} comment={commentCreate} onCancel={this.onCancel}></CommentCreate>
+                            <CommentCreate postId={this.props.postId} comment={commentCreate}></CommentCreate>
                             {
                                 comments && comments.filter(comment => !comment.deleted).map(comment => (
                                     <div key={comment.id} className={`comment-item animated fadeInUp ${commentCreate && comment.id === commentCreate.id ? 'comment-item-selected' : '' }`}>
@@ -114,7 +109,6 @@ const mapDispatchToProps = (dispatch) => {
         AddComment: (comment) => dispatch(AddComment(comment)),
         RemoveComment: (commentId, postId) => dispatch(RemoveComment(commentId, postId)),
         GetCommentById: (commentId) => dispatch(GetCommentById(commentId)),
-        ClearComment: () => dispatch(ClearComment()),
     }
 }
 
