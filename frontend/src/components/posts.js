@@ -29,7 +29,7 @@ class Posts extends Component {
 
     deletePost = (postId, event) => {
         event.stopPropagation()
-        this.props.RemovePost(postId)
+        this.props.RemovePost(postId, this.props.categoryName)
     }
 
     handlePostOrderChange = (event) => {
@@ -161,7 +161,7 @@ const mapDispatchToProps = (dispatch) => {
         GetAllPosts: () => dispatch(GetAllPosts()),
         GetPostsByCategory: (category) => dispatch(GetPostsByCategory(category)),
         VotePost: (postId, option) => dispatch(VotePost(postId, option)),
-        RemovePost: (postId) => dispatch(RemovePost(postId)),
+        RemovePost: (postId, category) => dispatch(RemovePost(postId, category)),
     }
 }
 

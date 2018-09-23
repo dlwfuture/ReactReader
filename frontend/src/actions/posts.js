@@ -98,11 +98,11 @@ export function EditPost(post){
     }
 }
 
-export function RemovePost(postId) {
+export function RemovePost(postId, category) {
     return (dispatch) => {
         removePost(postId)
         .then(() => {
-                return dispatch(GetAllPosts())
+                return !category ? dispatch(GetAllPosts()) : dispatch(GetPostsByCategory(category))
             }
         ).catch(error => {
             throw(error)
